@@ -14,7 +14,7 @@ A lot of people write code.  A lot of people write WordPress plugins.  A lot of 
 
 == Installation ==
 
-=== Manual Installation ===
+= Manual Installation =
 
 1. Upload the entire `wp-core-contributions-widget` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
@@ -24,17 +24,33 @@ A lot of people write code.  A lot of people write WordPress plugins.  A lot of 
 
 = Not all of my patches show up, what's wrong? =
 
-The Regular Expressions the system uses aren't perfect.  They catch the *majority* of your patches, but are bound to miss one or two due to inconsistent messages left by core committers.  If there are a *lot* of your patches missing, please report the issue on [GitHub](https://github.com/ericmann/WP-Core-Contributions-Widget).
+The system currently only parses the first page of search results.  So your latest 10 patches will always be displayed.
+
+= How can I customize the template? =
+
+Take a look at the default template in `/inc/wp-core-contributions-widget-template.php`.  This is the way the widget displays by default.
+
+However, you can place a custom template in your theme directory to override this.  Just place a `wp-core-contributions-widget-template.php` file in your theme directory to override the defaults.
+
+Remember, all of the parsed Trac tickets are contained in the `$items` array and you must populate the `$out` string with your desired markup.  Aside from that, use any variables you like.
+
+The `$items` array is a collection of associative arrays each containing:
+
+* `link` -> A link to the actual Trac changeset.
+* 'changeset' -> The ID of the changeset.
+* 'description' -> The commit message for the changeset.
+* 'ticket' -> The ID of the ticket fixed by the patch.
 
 == Screenshots ==
 
-No screenshots available at this time.
+1. Example widget showing the default markup on the Twenty Eleven theme and contributions by [ericmann](http://profiles.wordpress.org/users/ericmann/).
 
 == Changelog ==
 
 = 0.2 =
 * Added text domain
 * Improved RegEx parsing
+* Customizable output templates
 
 = 0.1 =
 * First release

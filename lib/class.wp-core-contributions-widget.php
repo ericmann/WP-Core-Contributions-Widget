@@ -50,19 +50,18 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 
 		// Widget content
 		$items = WP_Core_Contributions::get_items($user);
+		$out = '';
 
-		echo '<ul>';
-
-		foreach ($items as $item) {
-			echo '<li>';
-
-			echo '<a href="' . $item['link'] . '">[' . $item['changeset'] . ']</a> ';
-			echo 'for <a href="http://core.trac.wordpress.org/ticket/' . $item['ticket'] . '">#' . $item['ticket'] . '</a>';
-
-			echo '</li>';
+		// Include template - can be overriden by a theme!
+		$template_name = 'wp-core-contributions-widget-template.php';
+		$path = locate_template( $template_name );
+		if ( empty( $path ) ) {
+			$path = WP_CORE_CONTRIBUTIONS_WIDGET_DIR . 'inc/' . $template_name;
 		}
 
-		echo '</ul>';
+		include_once( $path ); // This include will generate the markup for the widget
+
+		echo $out; // Echo the markup to the browser
 
 		echo $after_widget;
 	}

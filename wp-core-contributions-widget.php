@@ -26,6 +26,10 @@ License: GPL3+
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+define( 'WP_CORE_CONTRIBUTIONS_WIDGET_VERSION', '0.2' );
+define( 'WP_CORE_CONTRIBUTIONS_WIDGET_URL',     plugin_dir_url( __FILE__ ) );
+define( 'WP_CORE_CONTRIBUTIONS_WIDGET_DIR',     dirname( __FILE__ ) . '/' );
+
 require_once( 'lib/class.wp-core-contributions.php' );
 require_once( 'lib/class.wp-core-contributions-widget.php' );
 
