@@ -5,10 +5,10 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 	function WP_Core_Contributions_Widget() {
 		$widget_ops = array(
 			'classname' => 'widget_core_contributions',
-			'description' => 'Add a list of your accepted contributions to WordPress Core as a sidebar widget.'
+			'description' => __( 'Add a list of your accepted contributions to WordPress Core as a sidebar widget.', 'wp-core-contributions-widget' )
 		);
 
-		$this->WP_Widget( false, 'WP Core Contributions', $widget_ops );
+		$this->WP_Widget( false, __( 'WP Core Contributions', 'wp-core-contributions-widget' ), $widget_ops );
 	}
 
 	function form( $instance ) {
@@ -16,7 +16,7 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 			$title = esc_attr( $instance[ 'title' ] );
 			$tracUser = esc_attr( $instance[ 'trac-user' ] );
 		} else {
-			$title = __( 'New title', 'wp-core-contributions-widget' );
+			$title = __( 'WP Core Contributions', 'wp-core-contributions-widget' );
 			$tracUser = __( 'Trac Username', 'wp-core-contributions-widget' );
 		}
 		?>

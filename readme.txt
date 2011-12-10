@@ -4,7 +4,7 @@ Donate link: http://jumping-duck.com/wordpress
 Tags: core, widget, contributions
 Requires at least: 3.2.1
 Tested up to: 3.3
-Stable tag: 0.1
+Stable tag: 0.2
 
 Add a list of your accepted contributions to WordPress Core as a sidebar widget.
 
@@ -31,6 +31,10 @@ The Regular Expressions the system uses aren't perfect.  They catch the *majorit
 No screenshots available at this time.
 
 == Changelog ==
+
+= 0.2 =
+* Added text domain
+* Improved RegEx parsing
 
 = 0.1 =
 * First release
