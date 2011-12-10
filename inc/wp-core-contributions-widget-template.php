@@ -13,7 +13,8 @@ foreach ($items as $item) {
 	$out .= '<li>';
 
 	$out .= '<a href="' . $item['link'] . '">[' . $item['changeset'] . ']</a> ';
-	$out .= 'for <a href="http://core.trac.wordpress.org/ticket/' . $item['ticket'] . '">#' . $item['ticket'] . '</a>';
+	if( $item['ticket'] )
+		$out .= 'for <a href="http://core.trac.wordpress.org/ticket/' . $item['ticket'] . '">#' . $item['ticket'] . '</a>';
 
 	$out .= '</li>';
 }
