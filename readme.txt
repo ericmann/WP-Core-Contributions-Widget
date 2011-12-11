@@ -4,7 +4,7 @@ Donate link: http://jumping-duck.com/wordpress
 Tags: core, widget, contributions
 Requires at least: 3.2.1
 Tested up to: 3.3
-Stable tag: 0.2
+Stable tag: 0.3
 
 Add a list of your accepted contributions to WordPress Core as a sidebar widget.
 
@@ -46,6 +46,11 @@ The `$items` array is a collection of associative arrays each containing:
 1. Example widget showing the default markup on the Twenty Eleven theme and contributions by [ericmann](http://profiles.wordpress.org/users/ericmann/).
 
 == Changelog ==
+
+= 0.3 =
+* Better formatting for widget template
+* Handle changesets not bound to tickets
+* Better i18n support
 
 = 0.2 =
 * Added text domain
