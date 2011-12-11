@@ -50,7 +50,6 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 
 		// Widget content
 		$items = WP_Core_Contributions::get_items($user);
-		$out = '';
 
 		// Include template - can be overriden by a theme!
 		$template_name = 'wp-core-contributions-widget-template.php';
@@ -60,8 +59,6 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 		}
 
 		include_once( $path ); // This include will generate the markup for the widget
-
-		echo $out; // Echo the markup to the browser
 
 		echo $after_widget;
 	}
