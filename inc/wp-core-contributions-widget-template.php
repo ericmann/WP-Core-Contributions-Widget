@@ -21,4 +21,9 @@
 		<?php } ?>
 	<?php endforeach; ?>
 	</ul>
+	<p>
+		<a href="<?php echo esc_url( 'https://core.trac.wordpress.org/search?q=' . $user . '&noquickjump=1&changeset=on&max=20' ); ?>">
+			<?php printf( _n( "View the ticket on Trac.", "View all %d tickets on Trac.", $total ), $total ); ?>
+		</a>
+	</p>
 <?php endif; ?>

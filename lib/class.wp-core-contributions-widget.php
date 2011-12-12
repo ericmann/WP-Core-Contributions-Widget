@@ -50,6 +50,7 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 
 		// Widget content
 		$items = WP_Core_Contributions::get_items($user);
+		$total = WP_Core_Contributions::get_changeset_count($user);
 
 		// Include template - can be overriden by a theme!
 		$template_name = 'wp-core-contributions-widget-template.php';

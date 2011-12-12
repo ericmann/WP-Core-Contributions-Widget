@@ -4,7 +4,7 @@ Donate link: http://jumping-duck.com/wordpress
 Tags: core, widget, contributions
 Requires at least: 3.2.1
 Tested up to: 3.3
-Stable tag: 0.3
+Stable tag: 0.4
 
 Add a list of your accepted contributions to WordPress Core as a sidebar widget.
 
@@ -32,20 +32,23 @@ Take a look at the default template in `/inc/wp-core-contributions-widget-templa
 
 However, you can place a custom template in your theme directory to override this.  Just place a `wp-core-contributions-widget-template.php` file in your theme directory to override the defaults.
 
-Remember, all of the parsed Trac tickets are contained in the `$items` array and you must populate the `$out` string with your desired markup.  Aside from that, use any variables you like.
+Remember, all of the parsed Trac tickets are contained in the `$items` array.  The total count of the user's contributions is contained in the `$total` variable.  Aside from that, use any variables you like.
 
 The `$items` array is a collection of associative arrays each containing:
 
 * `link` -> A link to the actual Trac changeset.
-* 'changeset' -> The ID of the changeset.
-* 'description' -> The commit message for the changeset.
-* 'ticket' -> The ID of the ticket fixed by the patch.
+* `changeset` -> The ID of the changeset.
+* `description` -> The commit message for the changeset.
+* `ticket` -> The ID of the ticket fixed by the patch.
 
 == Screenshots ==
 
 1. Example widget showing the default markup on the Twenty Eleven theme and contributions by [ericmann](http://profiles.wordpress.org/users/ericmann/).
 
 == Changelog ==
+
+= 0.4 =
+* Add a link to the full Trac results with a total result count listed.
 
 = 0.3 =
 * Better formatting for widget template

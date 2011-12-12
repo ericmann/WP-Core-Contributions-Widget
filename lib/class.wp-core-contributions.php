@@ -18,7 +18,7 @@ class WP_Core_Contributions{
 	public static function get_items( $username ) {
 		if($username == null) return array();
 
-		if( false === ( $formatted = get_transient( 'wp-core-contributions' ) ) ) {
+		if( false === ( $formatted = get_transient( 'wp-core-contributions-' . $username ) ) ) {
 
 			$results = wp_remote_retrieve_body(wp_remote_get('https://core.trac.wordpress.org/search?q=props+' . $username . '&noquickjump=1&changeset=on', array('sslverify'=>false)));
 
@@ -34,15 +34,33 @@ class WP_Core_Contributions{
 					'link' => 'https://core.trac.wordpress.org' . $match[0],
 					'changeset' => intval($match[1]),
 					'description' => $match[2],
-					'ticket' => $match[3] ? intval($match[4]) : '',
+					'ticket' => isset( $match[3] ) ? intval($match[4]) : '',
 				);
 				array_push($formatted, $newMatch);
 			}
 
-			set_transient( 'wp-core-contributions', $formatted, 60 * 60 * 12 );
+			set_transient( 'wp-core-contributions-' . $username, $formatted, 60 * 60 * 12 );
 		}
 
 		return $formatted;
+	}
+
+	public static function get_changeset_count( $username ) {
+		if ( $username == null ) return array();
+
+		if ( false == ( $count = get_transient( 'wp-core-contributions-count-' . $username ) ) ) {
+			$results = wp_remote_retrieve_body(wp_remote_get('https://core.trac.wordpress.org/search?q=props+' . $username . '&noquickjump=1&changeset=on', array('sslverify'=>false)));
+
+			$pattern = '/<meta name="totalResults" content="(\d*)" \/>/';
+
+			preg_match($pattern, $results, $matches);
+
+			$count = intval($matches[1]);
+
+			set_transient( 'wp-core-contributions-count-' . $username, $count, 60 * 60 * 12 );
+		}
+
+		return $count;
 	}
 }
 
