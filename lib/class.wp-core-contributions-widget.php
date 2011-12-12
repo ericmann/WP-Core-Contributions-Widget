@@ -12,20 +12,28 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 	}
 
 	function form( $instance ) {
+		// Gracefully upgrade if the display count isn't already set
+		if ( ! isset( $instance[ 'display-count' ] ) ) $instance[ 'display-count' ] = 5;
+
 		if ( $instance ) {
 			$title = esc_attr( $instance[ 'title' ] );
 			$tracUser = esc_attr( $instance[ 'trac-user' ] );
+			$tracCount = esc_attr( $instance[ 'display-count' ] );
 		} else {
 			$title = __( 'WP Core Contributions', 'wp-core-contributions-widget' );
 			$tracUser = __( 'Trac Username', 'wp-core-contributions-widget' );
+			$tracCount = 5;
 		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
 
-		<label for="<?php echo $this->get_field_id('trac-user'); ?>"><?php _e('Trac Username:'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('trac-user'); ?>" name="<?php echo $this->get_field_name('trac-user'); ?>" type="text" value="<?php echo $tracUser; ?>" />
+			<label for="<?php echo $this->get_field_id('trac-user'); ?>"><?php _e('Trac Username:'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('trac-user'); ?>" name="<?php echo $this->get_field_name('trac-user'); ?>" type="text" value="<?php echo $tracUser; ?>" />
+
+			<label for="<?php echo $this->get_field_id('display-count'); ?>"><?php _e('Display How Many Tickets?'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('display-count'); ?>" name="<?php echo $this->get_field_name('display-count'); ?>" type="text" value="<?php echo $tracCount; ?>" />
 		</p>
 		<?php
 	}
@@ -34,6 +42,7 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['trac-user'] = strip_tags($new_instance['trac-user']);
+		$instance['display-count'] = strip_tags($new_instance['display-count']);
 		return $instance;
 	}
 
@@ -41,6 +50,7 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
 		$user = $instance['trac-user'];
+		$count = isset($instance['display-count']) ? $instance['display-count'] : 10;
 
 		echo $before_widget;
 
@@ -49,7 +59,7 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 		}
 
 		// Widget content
-		$items = WP_Core_Contributions::get_items($user);
+		$items = array_slice( WP_Core_Contributions::get_items($user), 0, $count );
 		$total = WP_Core_Contributions::get_changeset_count($user);
 
 		// Include template - can be overriden by a theme!
