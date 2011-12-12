@@ -1,5 +1,5 @@
 === WP Core Contributions Widget ===
-Contributors: ericmann
+Contributors: ericmann, mfields, JohnPBloch
 Donate link: http://jumping-duck.com/wordpress
 Tags: core, widget, contributions
 Requires at least: 3.2.1
