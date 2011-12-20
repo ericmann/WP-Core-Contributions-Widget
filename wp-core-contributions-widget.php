@@ -3,7 +3,7 @@
 Plugin Name: WP Core Contributions Widget
 Plugin URI: http://jumping-duck.com/wordpress
 Description: Add a list of your accepted contributions to WordPress Core as a sidebar widget.
-Version: 1.0
+Version: 1.1
 Author: Eric Mann
 Author URI: http://eamann.com
 License: GPL3+

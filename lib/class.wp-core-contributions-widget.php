@@ -15,13 +15,21 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 		// Gracefully upgrade if the display count isn't already set
 		if ( ! isset( $instance[ 'display-count' ] ) ) $instance[ 'display-count' ] = 5;
 
-		if ( $instance ) {
+		if ( $instance && isset( $instance[ 'title' ] ) ) {
 			$title = esc_attr( $instance[ 'title' ] );
-			$tracUser = esc_attr( $instance[ 'trac-user' ] );
-			$tracCount = esc_attr( $instance[ 'display-count' ] );
 		} else {
 			$title = __( 'WP Core Contributions', 'wp-core-contributions-widget' );
+		}
+		
+		if ( $instance && isset( $instance[ 'trac-user' ] ) ) {
+			$tracUser = esc_attr( $instance[ 'trac-user' ] );
+		} else {
 			$tracUser = __( 'Trac Username', 'wp-core-contributions-widget' );
+		}
+		
+		if ( $instance && isset( $instance[ 'display-count' ] ) ) {
+			$tracCount = esc_attr( $instance[ 'display-count' ] );
+		} else {
 			$tracCount = 5;
 		}
 		?>
