@@ -5,6 +5,7 @@ Tags: core, widget, contributions
 Requires at least: 3.2.1
 Tested up to: 3.3
 Stable tag: 1.1
+License GPLv2+
 
 Add a list of your accepted contributions to WordPress Core as a sidebar widget.
 
