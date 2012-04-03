@@ -71,6 +71,23 @@ class WP_Core_Contributions{
 			
 			$results = wp_remote_retrieve_body( wp_remote_get( 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml', array('sslverify'=>false) ) );
 			
+			/* Expected XML format is as follows:
+			 * <?xml version="1.0"?>
+			 * <api>
+			 *   <query>
+			 *     <usercontribs>
+			 *       <item user="Ericmann" pageid="21224" revid="109742" ns="0" title="Nginx" timestamp="2011-09-30T20:39:55Z" comment="External Links" />
+			 *       <item user="Ericmann" pageid="15227" revid="107245" ns="0" title="Switching to PHP5" timestamp="2011-07-08T21:41:56Z" comment="" />
+			 *       <item user="Ericmann" pageid="4580" revid="105196" ns="0" title="Using Subversion" timestamp="2011-05-19T15:47:29Z" comment="Add a resource." />
+			 *       <item user="Ericmann" pageid="4580" revid="104777" ns="0" title="Using Subversion" timestamp="2011-05-12T15:11:59Z" comment="Add a resource." />
+			 *       <item user="Ericmann" pageid="21198" revid="102162" ns="0" title="GSoC2011" timestamp="2011-03-17T13:58:14Z" comment="Mentors" />
+			 *       <item user="Ericmann" pageid="21198" revid="102100" ns="0" title="GSoC2011" timestamp="2011-03-15T13:55:20Z" minor="" comment="Mentors" />
+			 *       <item user="Ericmann" pageid="19084" revid="93082" ns="0" title="Post Types" timestamp="2010-09-18T17:08:51Z" comment="Fixing typos" />
+			 *     </usercontribs>
+			 *   </query>
+			 * </api>
+			 **/
+			
 			$raw = new SimpleXMLElement( $results );
 			
 			$formatted = array();
@@ -98,7 +115,20 @@ class WP_Core_Contributions{
 
 		if ( false == ( $count = get_transient( 'wp-codex-contributions-count-' . $username ) ) ) {
 			
-			// To-Do: Get item count
+			$results = wp_remote_retrieve_body( wp_remote_get( 'http://codex.wordpress.org/api.php?action=query&list=users&ususers=' . $username . '&usprop=editcount', array('sslverify'=>false) ) );
+			
+			/* Expected XML format is as follows:
+			 * <?xml version="1.0"?>
+			 * <api>
+  			 *   <query>
+			 *     <users>
+			 *       <user name="Ericmann" editcount="8" />
+			 *     </users>
+			 *   </query>
+			 * </api>
+			 **/
+			
+			$raw = new SimpleXMLElement( $results );
 
 			set_transient( 'wp-codex-contributions-count-' . $username, $count, 60 * 60 * 12 );
 		}
