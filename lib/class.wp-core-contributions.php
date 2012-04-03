@@ -13,6 +13,7 @@ class WP_Core_Contributions{
 
 	public static function register_widget() {
 		register_widget('WP_Core_Contributions_Widget');
+		register_widget('WP_Codex_Contributions_Widget');
 	}
 
 	public static function get_items( $username ) {
@@ -61,6 +62,48 @@ class WP_Core_Contributions{
 		}
 
 		return $count;
+	}
+	
+	public static function get_codex_items( $username, $limit = 10 ) {
+		if ( $username == null ) return array();
+		
+		if ( false === ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
+			
+			$results = wp_remote_retrieve_body( wp_remote_get( 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml', array('sslverify'=>false) ) );
+			
+			$raw = new SimpleXMLElement( $results );
+			
+			$formatted = array();
+			
+			// To-Do: Walk through XML doc and create formatted object.
+			foreach( $items as $item ) {
+				array_shift( $item );
+				$newItem = array(
+					'link' => '',
+					'title' => $item->title,
+					'description' => $item->comment,
+					'revision' => $item->revid
+				);
+				array_push( $formatted, $newItem );
+			}
+			
+			set_transient( 'wp-codex-contributions-' . $username, $formatted, 60 * 60 * 12 );
+		}
+		
+		return $formatted;
+	}
+	
+	public static function get_codex_count( $username ) {
+		if ( $username == null ) return array();
+
+		if ( false == ( $count = get_transient( 'wp-codex-contributions-count-' . $username ) ) ) {
+			
+			// To-Do: Get item count
+
+			set_transient( 'wp-codex-contributions-count-' . $username, $count, 60 * 60 * 12 );
+		}
+
+		return $count;	
 	}
 }
 
