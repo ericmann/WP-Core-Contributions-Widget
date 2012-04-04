@@ -1,14 +1,14 @@
 <?php
 if ( ! class_exists('WP_Codex_Contributions_Widget') ) :
 
-class WP_Codex_Contributions_Widget() extends WP_Widget {
+class WP_Codex_Contributions_Widget extends WP_Widget {
 	function WP_Codex_Contributions_Widget() {
 		$widget_ops = array(
 			'classname' => 'widget_codex_contributions',
 			'description' => __( 'Add a list of your contributions to the WordPress Codex as a sidebar widget.', 'wp-core-contributions-widget' )
 		);
 		
-		$this->WP_Widget( false, __( 'WP Codex Contributions', 'wp-core-contributions-widget', $widget_ops );
+		$this->WP_Widget( false, __( 'WP Codex Contributions', 'wp-core-contributions-widget'), $widget_ops );
 	}
 	
 	function form( $instance ) {
