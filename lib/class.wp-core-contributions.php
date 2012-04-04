@@ -67,8 +67,7 @@ class WP_Core_Contributions{
 	public static function get_codex_items( $username, $limit = 10 ) {
 		if ( $username == null ) return array();
 		
-		//if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
-		if ( false == false ) {
+		if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
 			
 			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml';
 			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
@@ -132,7 +131,7 @@ class WP_Core_Contributions{
 			 **/
 			
 			$raw = new SimpleXMLElement( $results );
-			$count = (int)$raw->user["editcount"];
+			$count = (int)$raw->query->users->user["editcount"];
 			
 			set_transient( 'wp-codex-contributions-count-' . $username, $count, 60 * 60 * 12 );
 		}
