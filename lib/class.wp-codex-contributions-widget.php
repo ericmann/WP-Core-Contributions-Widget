@@ -57,6 +57,7 @@ class WP_Codex_Contributions_Widget extends WP_Widget {
 	function widget( $args, $instance ){
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
+		// Mediawiki usernames uppercase on 1st letter & case-specific
 		$user = $instance['codex-user'];
 		$count = isset($instance['display-count']) ? $instance['display-count'] : 10;
 
@@ -67,7 +68,7 @@ class WP_Codex_Contributions_Widget extends WP_Widget {
 		}
 
 		// Widget content
-		$items = array_slice( WP_Core_Contributions::get_codex_items($user), 0, $count );
+		$items = array_slice( WP_Core_Contributions::get_codex_items($user, $count), 0, $count );
 		$total = WP_Core_Contributions::get_codex_count($user);
 
 		// Include template - can be overriden by a theme!

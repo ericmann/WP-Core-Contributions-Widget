@@ -67,9 +67,11 @@ class WP_Core_Contributions{
 	public static function get_codex_items( $username, $limit = 10 ) {
 		if ( $username == null ) return array();
 		
-		if ( false === ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
+		//if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
+		if ( false == false ) {
 			
-			$results = wp_remote_retrieve_body( wp_remote_get( 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml', array('sslverify'=>false) ) );
+			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml';
+			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
 			
 			/* Expected XML format is as follows:
 			 * <?xml version="1.0"?>
@@ -85,6 +87,9 @@ class WP_Core_Contributions{
 			 *       <item user="Ericmann" pageid="19084" revid="93082" ns="0" title="Post Types" timestamp="2010-09-18T17:08:51Z" comment="Fixing typos" />
 			 *     </usercontribs>
 			 *   </query>
+			 *   <query-continue>
+			 *     <usercontribs ucstart="2010-09-18T16:48:17Z"/>
+			 *   </query-continue>
 			 * </api>
 			 **/
 			
@@ -92,14 +97,11 @@ class WP_Core_Contributions{
 			
 			$formatted = array();
 			
-			// To-Do: Walk through XML doc and create formatted object.
-			foreach( $items as $item ) {
-				array_shift( $item );
+			foreach( $raw->query->usercontribs->item as $item ) {
 				$newItem = array(
-					'link' => '',
-					'title' => $item->title,
-					'description' => $item->comment,
-					'revision' => $item->revid
+					'title' => (string)$item['title'],
+					'description' => (string)$item['comment'],
+					'revision' => (int)$item['revid']
 				);
 				array_push( $formatted, $newItem );
 			}
@@ -115,7 +117,8 @@ class WP_Core_Contributions{
 
 		if ( false == ( $count = get_transient( 'wp-codex-contributions-count-' . $username ) ) ) {
 			
-			$results = wp_remote_retrieve_body( wp_remote_get( 'http://codex.wordpress.org/api.php?action=query&list=users&ususers=' . $username . '&usprop=editcount', array('sslverify'=>false) ) );
+			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=users&ususers=' . $username . '&usprop=editcount&format=xml';
+			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
 			
 			/* Expected XML format is as follows:
 			 * <?xml version="1.0"?>
@@ -129,7 +132,8 @@ class WP_Core_Contributions{
 			 **/
 			
 			$raw = new SimpleXMLElement( $results );
-
+			$count = (int)$raw->user["editcount"];
+			
 			set_transient( 'wp-codex-contributions-count-' . $username, $count, 60 * 60 * 12 );
 		}
 
