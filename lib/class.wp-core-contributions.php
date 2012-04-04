@@ -13,6 +13,7 @@ class WP_Core_Contributions{
 
 	public static function register_widget() {
 		register_widget('WP_Core_Contributions_Widget');
+		register_widget('WP_Codex_Contributions_Widget');
 	}
 
 	public static function get_items( $username ) {
@@ -61,6 +62,81 @@ class WP_Core_Contributions{
 		}
 
 		return $count;
+	}
+	
+	public static function get_codex_items( $username, $limit = 10 ) {
+		if ( $username == null ) return array();
+		
+		if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
+			
+			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml';
+			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
+			
+			/* Expected XML format is as follows:
+			 * <?xml version="1.0"?>
+			 * <api>
+			 *   <query>
+			 *     <usercontribs>
+			 *       <item user="Ericmann" pageid="21224" revid="109742" ns="0" title="Nginx" timestamp="2011-09-30T20:39:55Z" comment="External Links" />
+			 *       <item user="Ericmann" pageid="15227" revid="107245" ns="0" title="Switching to PHP5" timestamp="2011-07-08T21:41:56Z" comment="" />
+			 *       <item user="Ericmann" pageid="4580" revid="105196" ns="0" title="Using Subversion" timestamp="2011-05-19T15:47:29Z" comment="Add a resource." />
+			 *       <item user="Ericmann" pageid="4580" revid="104777" ns="0" title="Using Subversion" timestamp="2011-05-12T15:11:59Z" comment="Add a resource." />
+			 *       <item user="Ericmann" pageid="21198" revid="102162" ns="0" title="GSoC2011" timestamp="2011-03-17T13:58:14Z" comment="Mentors" />
+			 *       <item user="Ericmann" pageid="21198" revid="102100" ns="0" title="GSoC2011" timestamp="2011-03-15T13:55:20Z" minor="" comment="Mentors" />
+			 *       <item user="Ericmann" pageid="19084" revid="93082" ns="0" title="Post Types" timestamp="2010-09-18T17:08:51Z" comment="Fixing typos" />
+			 *     </usercontribs>
+			 *   </query>
+			 *   <query-continue>
+			 *     <usercontribs ucstart="2010-09-18T16:48:17Z"/>
+			 *   </query-continue>
+			 * </api>
+			 **/
+			
+			$raw = new SimpleXMLElement( $results );
+			
+			$formatted = array();
+			
+			foreach( $raw->query->usercontribs->item as $item ) {
+				$newItem = array(
+					'title' => (string)$item['title'],
+					'description' => (string)$item['comment'],
+					'revision' => (int)$item['revid']
+				);
+				array_push( $formatted, $newItem );
+			}
+			
+			set_transient( 'wp-codex-contributions-' . $username, $formatted, 60 * 60 * 12 );
+		}
+		
+		return $formatted;
+	}
+	
+	public static function get_codex_count( $username ) {
+		if ( $username == null ) return array();
+
+		if ( false == ( $count = get_transient( 'wp-codex-contributions-count-' . $username ) ) ) {
+			
+			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=users&ususers=' . $username . '&usprop=editcount&format=xml';
+			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
+			
+			/* Expected XML format is as follows:
+			 * <?xml version="1.0"?>
+			 * <api>
+  			 *   <query>
+			 *     <users>
+			 *       <user name="Ericmann" editcount="8" />
+			 *     </users>
+			 *   </query>
+			 * </api>
+			 **/
+			
+			$raw = new SimpleXMLElement( $results );
+			$count = (int)$raw->query->users->user["editcount"];
+			
+			set_transient( 'wp-codex-contributions-count-' . $username, $count, 60 * 60 * 12 );
+		}
+
+		return $count;	
 	}
 }
 
