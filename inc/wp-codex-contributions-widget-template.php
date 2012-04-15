@@ -20,9 +20,9 @@
 		<a href="<?php echo esc_url( 'http://codex.wordpress.org/Special:Contributions/' . ucfirst( $user ) ); ?>">
 			<?php
 				if ( $total == 2 ) {
-					print( "View both changes in the Codex." );
+					_e( "View both changes in the Codex.", 'wp-core-contributions-widget' );
 				} else {
-					printf( _n( "View the change in the Codex.", "View all %d changes in the Codex.", $total ), $total );
+					printf( _n( "View the change in the Codex.", "View all %d changes in the Codex.", $total, 'wp-core-contributions-widget' ), $total );
 				}
 			?>
 		</a>

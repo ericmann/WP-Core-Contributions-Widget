@@ -25,9 +25,9 @@
 		<a href="<?php echo esc_url( 'https://core.trac.wordpress.org/search?q=' . $user . '&noquickjump=1&changeset=on&max=20' ); ?>">
 			<?php
 				if ( $total == 2 ) {
-					print( "View both tickets on Trac." );
+					_e( "View both tickets on Trac.", 'wp-core-contributions-widget' );
 				} else {
-					printf( _n( "View the ticket on Trac.", "View all %d tickets on Trac.", $total ), $total );
+					printf( _n( "View the ticket on Trac.", "View all %d tickets on Trac.", $total, 'wp-core-contributions-widget' ), $total );
 				}
 			?>
 		</a>
