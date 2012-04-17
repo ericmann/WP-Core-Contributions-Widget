@@ -10,10 +10,17 @@
 	<ul>
 	<?php foreach ( (array) $items as $item ) :
 		$link = 'http://codex.wordpress.org/index.php?title=' . $item['title'] . '&oldid=' . $item['revision'];
+
+		if ( (bool)$item['function_ref'] ) {
 	?>
-		<li><?php printf( __( 'For %1$s' ),
-			'<a href="' . esc_url( $link ) . '">' . esc_html( $item['title'] ) . '</a>'
+		<li><?php printf( __( 'Function: %1$s', 'wp-core-contributions-widget' ),
+			'<a href="' . esc_url( $link ) . '" title="' . esc_html( $item['description'] ) . '">' . esc_html( $item['title'] ) . '</a>'
 		); ?></li>
+	<?php } else { ?>
+		<li><?php printf( __( 'For %1$s', 'wp-core-contributions-widget' ),
+			'<a href="' . esc_url( $link ) . '" title="' . esc_html( $item['description'] ) . '">' . esc_html( $item['title'] ) . '</a>'
+		); ?></li>
+	<?php } ?>
 	<?php endforeach; ?>
 	</ul>
 	<p>

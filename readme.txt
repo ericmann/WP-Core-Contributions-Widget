@@ -4,8 +4,8 @@ Donate link: http://jumping-duck.com/wordpress
 Tags: core, widget, contributions
 Requires at least: 3.2.1
 Tested up to: 3.4
-Stable tag: 1.2
-License GPLv2+
+Stable tag: 1.2.1
+License: GPLv2+
 
 Add a list of your accepted contributions to WordPress Core as a sidebar widget.
 
@@ -57,6 +57,7 @@ The Codex `$items` array is a collection of associative arrays, each containing:
 * `title` -> Title of the page being changed.
 * `description` -> Description of the change made.
 * `revision` -> Revision number according to the Codex wiki (used to create a link).
+* `function_ref` -> Boolean flag regarding whether or not the change was to a function reference. Removes "Function Reference/" from the page title.
 
 == Screenshots ==
 
@@ -64,6 +65,11 @@ The Codex `$items` array is a collection of associative arrays, each containing:
 1. Example widget showing the default Codex contributions widget on the Twenty Eleven theme (contributions by [ericmann](http://profiles.wordpress.org/users/ericmann/).
 
 == Changelog ==
+
+= 1.2.1 =
+* Switch to PHP return for Codex data
+* Shorten page names when returned from Codex
+* Add title tags to Codex links for context
 
 = 1.2 =
 * Add Codex contributions widget

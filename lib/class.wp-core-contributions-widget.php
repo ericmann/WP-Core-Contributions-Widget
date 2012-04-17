@@ -77,7 +77,7 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 			$path = WP_CORE_CONTRIBUTIONS_WIDGET_DIR . 'inc/' . $template_name;
 		}
 
-		include_once( $path ); // This include will generate the markup for the widget
+		include( $path ); // This include will generate the markup for the widget
 
 		echo $after_widget;
 	}

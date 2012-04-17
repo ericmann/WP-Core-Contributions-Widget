@@ -67,40 +67,44 @@ class WP_Core_Contributions{
 	public static function get_codex_items( $username, $limit = 10 ) {
 		if ( $username == null ) return array();
 		
-		if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
+		if ( true || false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
 			
-			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=xml';
+			$results_url = 'http://codex.wordpress.org/api.php?action=query&list=usercontribs&ucuser=' . $username . '&uclimit=' . $limit . '&ucdir=older&format=php';
 			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
+
+			$raw = unserialize( $results );
 			
-			/* Expected XML format is as follows:
-			 * <?xml version="1.0"?>
-			 * <api>
-			 *   <query>
-			 *     <usercontribs>
-			 *       <item user="Ericmann" pageid="21224" revid="109742" ns="0" title="Nginx" timestamp="2011-09-30T20:39:55Z" comment="External Links" />
-			 *       <item user="Ericmann" pageid="15227" revid="107245" ns="0" title="Switching to PHP5" timestamp="2011-07-08T21:41:56Z" comment="" />
-			 *       <item user="Ericmann" pageid="4580" revid="105196" ns="0" title="Using Subversion" timestamp="2011-05-19T15:47:29Z" comment="Add a resource." />
-			 *       <item user="Ericmann" pageid="4580" revid="104777" ns="0" title="Using Subversion" timestamp="2011-05-12T15:11:59Z" comment="Add a resource." />
-			 *       <item user="Ericmann" pageid="21198" revid="102162" ns="0" title="GSoC2011" timestamp="2011-03-17T13:58:14Z" comment="Mentors" />
-			 *       <item user="Ericmann" pageid="21198" revid="102100" ns="0" title="GSoC2011" timestamp="2011-03-15T13:55:20Z" minor="" comment="Mentors" />
-			 *       <item user="Ericmann" pageid="19084" revid="93082" ns="0" title="Post Types" timestamp="2010-09-18T17:08:51Z" comment="Fixing typos" />
-			 *     </usercontribs>
-			 *   </query>
-			 *   <query-continue>
-			 *     <usercontribs ucstart="2010-09-18T16:48:17Z"/>
-			 *   </query-continue>
-			 * </api>
+			/* Expected array format is as follows:
+			 * Array
+			 * (
+			 *     [query] => Array
+			 *         (
+			 *             [usercontribs] => Array
+			 *                 (
+			 *                     [0] => Array
+			 *                         (
+			 *                             [user] => Mbijon
+			 *                             [pageid] => 23000
+			 *                             [revid] => 112024
+			 *                             [ns] => 0
+			 *                             [title] => Function Reference/add help tab
+			 *                             [timestamp] => 2011-12-13T23:49:38Z
+			 *                             [minor] =>
+			 *                             [comment] => Functions typo fix
+			 *                         )
 			 **/
-			
-			$raw = new SimpleXMLElement( $results );
 			
 			$formatted = array();
 			
-			foreach( $raw->query->usercontribs->item as $item ) {
+			foreach( $raw['query']['usercontribs'] as $item ) {
+				$count = 0;
+				$clean_title = preg_replace( '/^Function Reference\//', '', (string)$item['title'], 1, $count );
+
 				$newItem = array(
-					'title' => (string)$item['title'],
+					'title' => $clean_title,
 					'description' => (string)$item['comment'],
-					'revision' => (int)$item['revid']
+					'revision' => (int)$item['revid'],
+					'function_ref' => $count == 0 ? false : true
 				);
 				array_push( $formatted, $newItem );
 			}
