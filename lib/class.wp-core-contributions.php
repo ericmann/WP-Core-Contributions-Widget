@@ -8,7 +8,7 @@ class WP_Core_Contributions {
 	}
 
 	public static function wp_init() {
-		load_plugin_textdomain( 'wp-core-contributions-widget', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		load_plugin_textdomain( 'wp-core-contributions-widget', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/lang/' );
 	}
 
 	public static function register_widget() {

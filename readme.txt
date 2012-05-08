@@ -1,10 +1,10 @@
 === WP Core Contributions Widget ===
-Contributors: ericmann, mfields, JohnPBloch, mbijon
+Contributors: ericmann, mfields, JohnPBloch, mbijon, kobenland
 Donate link: http://jumping-duck.com/wordpress
 Tags: core, widget, contributions
 Requires at least: 3.2.1
 Tested up to: 3.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2+
 
 Add a list of your accepted contributions to WordPress Core as a sidebar widget.
@@ -65,6 +65,10 @@ The Codex `$items` array is a collection of associative arrays, each containing:
 1. Example widget showing the default Codex contributions widget on the Twenty Eleven theme (contributions by [ericmann](http://profiles.wordpress.org/users/ericmann/).
 
 == Changelog ==
+
+= 1.2.2 =
+* Clean up query string generation with Trac API
+* Add German translation
 
 = 1.2.1 =
 * Switch to PHP return for Codex data
