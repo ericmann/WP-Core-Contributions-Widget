@@ -32,7 +32,7 @@ define( 'WP_CORE_CONTRIBUTIONS_WIDGET_DIR',     dirname( __FILE__ ) . '/' );
 
 // Load widget templates automatically from /lib/ folder
 if ( is_dir( dirname(__FILE__) . '/lib/') ) {
-    $widgets = glob( WP_CORE_CONTRIBUTIONS_WIDGET_DIR . 'lib/class.*.php');
+    $widgets = glob( WP_CORE_CONTRIBUTIONS_WIDGET_DIR . 'lib/class.*.php' );
     
     foreach ( (array)$widgets as $widget ) {
 	include_once($widget);
