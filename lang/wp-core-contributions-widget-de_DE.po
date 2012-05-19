@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Core Contributions Widget v1.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2012-05-05 10:00+0000\n"
+"Last-Translator: kobenland <obenland@gmx.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: inc/wp-codex-contributions-widget-template.php:16
+#, php-format
+#@ wp-core-contributions-widget
+msgid "Function: %1$s"
+msgstr "Funktion: %1$s"
+
+#: inc/wp-codex-contributions-widget-template.php:20
+#, php-format
+#@ wp-core-contributions-widget
+msgid "For %1$s"
+msgstr "F&uuml;r %1$s"
+
+#: inc/wp-codex-contributions-widget-template.php:30
+#@ wp-core-contributions-widget
+msgid "View both changes in the Codex."
+msgstr "Beide &Auml;nderungen im Codex ansehen."
+
+#: inc/wp-codex-contributions-widget-template.php:32
+#, php-format
+#@ wp-core-contributions-widget
+msgid "View the change in the Codex."
+msgid_plural "View all %d changes in the Codex."
+msgstr[0] "Die &Auml;nderung im Codex ansehen."
+msgstr[1] "Alle %d &Auml;nderungen im Codex ansehen."
+
+#: inc/wp-core-contributions-widget-template.php:13
+#, php-format
+#@ default
+msgid "[%1$s] for %2$s"
+msgstr ""
+
+#: inc/wp-core-contributions-widget-template.php:18
+#, php-format
+#@ default
+msgid "[%1$s]"
+msgstr ""
+
+#: inc/wp-core-contributions-widget-template.php:28
+#@ wp-core-contributions-widget
+msgid "View both tickets on Trac."
+msgstr "Beide Tickets in Trac ansehen."
+
+#: inc/wp-core-contributions-widget-template.php:30
+#, php-format
+#@ wp-core-contributions-widget
+msgid "View the ticket on Trac."
+msgid_plural "View all %d tickets on Trac."
+msgstr[0] "Das Ticket in Trac ansehen."
+msgstr[1] "Alle %d Tickets in Trac ansehen."
+
+#: lib/class.wp-codex-contributions-widget.php:8
+#@ wp-core-contributions-widget
+msgid "Add a list of your contributions to the WordPress Codex as a sidebar widget."
+msgstr "F&uuml;ge der Sidebar eine Liste deiner Beitr&auml;ge zum WordPress Codex hinzu."
+
+#: lib/class.wp-codex-contributions-widget.php:11
+#: lib/class.wp-codex-contributions-widget.php:21
+#@ wp-core-contributions-widget
+msgid "WP Codex Contributions"
+msgstr "WP Codex Beitr&auml;ge"
+
+#: lib/class.wp-codex-contributions-widget.php:27
+#@ wp-core-contributions-widget
+msgid "Codex Username"
+msgstr "Codex Benutzername"
+
+#: lib/class.wp-codex-contributions-widget.php:37
+#: lib/class.wp-core-contributions-widget.php:37
+#@ wp-core-contributions-widget
+msgid "Title:"
+msgstr "Titel:"
+
+#: lib/class.wp-codex-contributions-widget.php:40
+#@ wp-core-contributions-widget
+msgid "Codex Username:"
+msgstr "Codex Benutzername:"
+
+#: lib/class.wp-codex-contributions-widget.php:43
+#@ wp-core-contributions-widget
+msgid "Display How Many Changes?"
+msgstr "Wieviele &Auml;nderungen anzeigen?"
+
+#: lib/class.wp-core-contributions-widget.php:8
+#@ wp-core-contributions-widget
+msgid "Add a list of your accepted contributions to WordPress Core as a sidebar widget."
+msgstr "F&uuml;ge der Sidebar eine Liste deiner akzeptierten Beitr&auml;ge zu WordPress Core hinzu."
+
+#: lib/class.wp-core-contributions-widget.php:11
+#: lib/class.wp-core-contributions-widget.php:21
+#@ wp-core-contributions-widget
+msgid "WP Core Contributions"
+msgstr "WP Core Beitr&auml;ge"
+
+#: lib/class.wp-core-contributions-widget.php:27
+#@ wp-core-contributions-widget
+msgid "Trac Username"
+msgstr "Trac Benutzername"
+
+#: lib/class.wp-core-contributions-widget.php:40
+#@ wp-core-contributions-widget
+msgid "Trac Username:"
+msgstr "Trac Benutzername:"
+
+#: lib/class.wp-core-contributions-widget.php:43
+#@ wp-core-contributions-widget
+msgid "Display How Many Tickets?"
+msgstr "Wieviele Tickets anzeigen?"
+
