@@ -36,10 +36,12 @@ class WP_Core_Contributions_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wp-core-contributions-widget' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-
+		</p>
+		<p>
 			<label for="<?php echo $this->get_field_id( 'trac-user' ); ?>"><?php _e( 'Trac Username:', 'wp-core-contributions-widget' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('trac-user'); ?>" name="<?php echo $this->get_field_name( 'trac-user' ); ?>" type="text" value="<?php echo $trac_user; ?>" />
-
+		</p>
+		<p>
 			<label for="<?php echo $this->get_field_id( 'display-count' ); ?>"><?php _e( 'Display How Many Tickets?', 'wp-core-contributions-widget' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'display-count' ); ?>" name="<?php echo $this->get_field_name( 'display-count' ); ?>" type="text" value="<?php echo $trac_count; ?>" />
 		</p>

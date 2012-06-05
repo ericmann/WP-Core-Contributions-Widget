@@ -36,10 +36,12 @@ class WP_Codex_Contributions_Widget extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wp-core-contributions-widget' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-
+		</p>
+		<p>
 			<label for="<?php echo $this->get_field_id( 'codex-user' ); ?>"><?php _e( 'Codex Username:', 'wp-core-contributions-widget' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'codex-user' ); ?>" name="<?php echo $this->get_field_name( 'codex-user' ); ?>" type="text" value="<?php echo $codex_user; ?>" />
-
+		</p>
+		<p>
 			<label for="<?php echo $this->get_field_id( 'display-count' ); ?>"><?php _e( 'Display How Many Changes?', 'wp-core-contributions-widget' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'display-count' ); ?>" name="<?php echo $this->get_field_name( 'display-count' ); ?>" type="text" value="<?php echo $codex_count; ?>" />
 		</p>
