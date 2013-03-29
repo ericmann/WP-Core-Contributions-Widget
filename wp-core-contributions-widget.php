@@ -26,7 +26,7 @@ License: GPLv2+
  *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-define( 'WP_CORE_CONTRIBUTIONS_WIDGET_VERSION', '1.0' );
+define( 'WP_CORE_CONTRIBUTIONS_WIDGET_VERSION', '1.2.2' );
 define( 'WP_CORE_CONTRIBUTIONS_WIDGET_URL',     plugin_dir_url( __FILE__ ) );
 define( 'WP_CORE_CONTRIBUTIONS_WIDGET_DIR',     dirname( __FILE__ ) . '/' );
 
