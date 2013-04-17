@@ -1,0 +1,88 @@
+# Translation of WP Core Contributor Widget in Portuguese (Brazil)
+# This file is distributed under the same license as the WP Core Contributor Widget package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-04-17 17:48-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: WP Core Contributions Widget\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Eduardo Zulian <eduardozulian@gmail.com>\n"
+"Language-Team: \n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/inc/wp-codex-contributions-widget-template.php:16
+msgid "Function: %1$s"
+msgstr "Função: %1$s"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/inc/wp-codex-contributions-widget-template.php:20
+msgid "For %1$s"
+msgstr "Para %1$s"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/inc/wp-codex-contributions-widget-template.php:30
+msgid "View both changes in the Codex."
+msgstr "Veja ambas as mudanças no Codex."
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/inc/wp-core-contributions-widget-template.php:13
+msgid "[%1$s] for %2$s"
+msgstr "[%1$s] para %2$s"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/inc/wp-core-contributions-widget-template.php:18
+msgid "[%1$s]"
+msgstr "[%1$s]"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/inc/wp-core-contributions-widget-template.php:28
+msgid "View both tickets on Trac."
+msgstr "Veja ambos os tickets no Trac."
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:8
+msgid "Add a list of your contributions to the WordPress Codex as a sidebar widget."
+msgstr "Adiciona uma lista com suas contribuições ao Codex do WordPress."
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:11
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:21
+msgid "WP Codex Contributions"
+msgstr "Contribuições ao WP Codex"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:27
+msgid "Codex Username"
+msgstr "Nome de usuário no Codex"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:37
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:37
+msgid "Title:"
+msgstr "Título:"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:40
+msgid "Codex Username:"
+msgstr "Nome de usuário no Codex:"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-codex-contributions-widget.php:43
+msgid "Display How Many Changes?"
+msgstr "Quantas mudanças serão mostradas?"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:8
+msgid "Add a list of your accepted contributions to WordPress Core as a sidebar widget."
+msgstr "Adiciona uma lista com suas contribuições aceitas ao core do WordPress."
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:11
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:21
+msgid "WP Core Contributions"
+msgstr "Contribuições ao core do WP"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:27
+msgid "Trac Username"
+msgstr "Nome de usuário no Trac"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:40
+msgid "Trac Username:"
+msgstr "Nome de usuário no Trac:"
+
+#: C:\xampp\htdocs\wp-test\wp-content\plugins\wp-core-contributions-widget/lib/class.wp-core-contributions-widget.php:43
+msgid "Display How Many Tickets?"
+msgstr "Quantos tickets serão mostrados?"
+
