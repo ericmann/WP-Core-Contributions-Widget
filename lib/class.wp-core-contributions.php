@@ -3,11 +3,11 @@ if ( ! class_exists('WP_Core_Contributions') ) :
 
 class WP_Core_Contributions {
 	public static function init() {
-		add_action( 'init',         array( 'WP_Core_Contributions', 'wp_init' ) );
+		add_action( 'plugins_loaded',         array( 'WP_Core_Contributions', 'load_plugin_textdomain' ) );
 		add_action( 'widgets_init', array( 'WP_Core_Contributions', 'register_widget' ) );
 	}
 
-	public static function wp_init() {
+	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'wp-core-contributions-widget', false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/lang/' );
 	}
 
