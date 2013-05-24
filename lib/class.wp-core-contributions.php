@@ -44,7 +44,7 @@ class WP_Core_Contributions {
 				array_push( $formatted, $new_match );
 			}
 
-			set_transient( 'wp-core-contributions-' . $username, $formatted, 60 * 60 * 12 );
+			set_transient( 'wp-core-contributions-' . $username, $formatted, apply_filters( 'wpcc_core_transient', 60 * 60 * 12 ) );
 		}
 
 		return $formatted;
@@ -67,7 +67,7 @@ class WP_Core_Contributions {
 
 			$count = intval( $matches[1] );
 
-			set_transient( 'wp-core-contributions-count-' . $username, $count, 60 * 60 * 12 );
+			set_transient( 'wp-core-contributions-count-' . $username, $count, apply_filters( 'wpcc_core_count_transient', 60 * 60 * 12 ) );
 		}
 
 		return $count;
@@ -125,7 +125,7 @@ class WP_Core_Contributions {
 				array_push( $formatted, $new_item );
 			}
 			
-			set_transient( 'wp-codex-contributions-' . $username, $formatted, 60 * 60 * 12 );
+			set_transient( 'wp-codex-contributions-' . $username, $formatted, apply_filters( 'wpcc_codex_transient', 60 * 60 * 12 ) );
 		}
 		
 		return $formatted;
@@ -159,7 +159,7 @@ class WP_Core_Contributions {
 			$raw = new SimpleXMLElement( $results );
 			$count = (int) $raw->query->users->user["editcount"];
 			
-			set_transient( 'wp-codex-contributions-count-' . $username, $count, 60 * 60 * 12 );
+			set_transient( 'wp-codex-contributions-count-' . $username, $count, apply_filters( 'wpcc_codex_count_transient', 60 * 60 * 12 ) );
 		}
 
 		return $count;	
