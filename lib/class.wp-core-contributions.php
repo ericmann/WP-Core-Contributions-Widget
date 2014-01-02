@@ -25,7 +25,8 @@ class WP_Core_Contributions {
 					'noquickjump'	=>	'1',
 					'changeset'		=>	'on'
 			), 'https://core.trac.wordpress.org/search' );
-			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array( 'sslverify' => false ) ) );
+			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
+			$results = wp_remote_retrieve_body( $response );
 
 			$pattern = '/<dt><a href="(.*?)" class="searchable">\[(.*?)\]: ((?s).*?)<\/a><\/dt>\n\s*(<dd class="searchable">.*\n?.*(?:ixes|ee) #(.*?)\n?<\/dd>)?/';
 
@@ -59,7 +60,8 @@ class WP_Core_Contributions {
 				'noquickjump'	=>	'1',
 				'changeset'		=>	'on'
 			), 'https://core.trac.wordpress.org/search' );
-			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array( 'sslverify' => false ) ) );
+			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
+			$results = wp_remote_retrieve_body( $response );
 
 			$pattern = '/<meta name="totalResults" content="(\d*)" \/>/';
 
@@ -86,7 +88,8 @@ class WP_Core_Contributions {
 				'ucdir'		=>	'older',
 				'format'	=>	'php'
 			), 'http://codex.wordpress.org/api.php' );
-			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array( 'sslverify' => false ) ) );
+			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
+			$results = wp_remote_retrieve_body( $response );
 
 			$raw = maybe_unserialize( $results );
 			
@@ -143,7 +146,8 @@ class WP_Core_Contributions {
 				'usprop'	=>	'editcount',
 				'format'	=>	'xml'
 			), 'http://codex.wordpress.org/api.php' );
-			$results = wp_remote_retrieve_body( wp_remote_get( $results_url, array('sslverify'=>false) ) );
+			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
+			$results = wp_remote_retrieve_body( $response );
 			
 			/* Expected XML format is as follows:
 			 * <?xml version="1.0"?>
