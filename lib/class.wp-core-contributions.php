@@ -136,35 +136,37 @@ class WP_Core_Contributions {
 		if ( null == $username ) return array();
 
 		if ( false == ( $count = get_transient( 'wp-codex-contributions-count-' . $username ) ) ) {
-			
 			$results_url = add_query_arg( array(
-				'action'	=>	'query',
-				'list'		=>	'users',
-				'ususers'	=>	$username,
-				'usprop'	=>	'editcount',
-				'format'	=>	'xml'
+				'action'    =>  'query',
+				'list'      =>  'users',
+				'ususers'   =>  $username,
+				'usprop'    =>  'editcount',
+				'format'    =>  'json'
 			), 'http://codex.wordpress.org/api.php' );
 			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
-			$results = wp_remote_retrieve_body( $response );
-			
-			/* Expected XML format is as follows:
-			 * <?xml version="1.0"?>
-			 * <api>
-  			 *   <query>
-			 *     <users>
-			 *       <user name="Ericmann" editcount="8" />
-			 *     </users>
-			 *   </query>
-			 * </api>
+			$results  = wp_remote_retrieve_body( $response );
+
+			/* Expected object format is as follows:
+			 * Object
+			 * (
+			 *     [query] => Object
+			 *         (
+			 *             [users] => Array
+			 *                 (
+			 *                     [0] => Object
+			 *                         (
+			 *                             [name] => Ericmann
+			 *                             [editcount] => 0
+			 *                         )
 			 **/
-			
-			$raw = new SimpleXMLElement( $results );
-			$count = (int) $raw->query->users->user["editcount"];
-			
+
+			$raw   = json_decode( $results );
+			$count = (int) $raw->query->users[0]->editcount;
+
 			set_transient( 'wp-codex-contributions-count-' . $username, $count, apply_filters( 'wpcc_codex_count_transient', 60 * 60 * 12 ) );
 		}
 
-		return $count;	
+		return $count;
 	}
 }
 
