@@ -78,7 +78,7 @@ class WP_Core_Contributions {
 	public static function get_codex_items( $username, $limit = 10 ) {
 		if ( null == $username ) return array();
 
-		if ( true || false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
+		if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
 			$results_url = add_query_arg( array(
 				'action'    => 'query',
 				'list'      => 'usercontribs',
