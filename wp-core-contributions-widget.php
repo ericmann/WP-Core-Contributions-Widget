@@ -31,8 +31,12 @@ define( 'WP_CORE_CONTRIBUTIONS_WIDGET_URL',     plugin_dir_url( __FILE__ ) );
 define( 'WP_CORE_CONTRIBUTIONS_WIDGET_DIR',     dirname( __FILE__ ) . '/' );
 
 require_once( 'lib/class.wp-core-contributions.php' );
+require_once( 'lib/class.wp-meta-contributions.php' );
 require_once( 'lib/class.wp-core-contributions-widget.php' );
+require_once( 'lib/class.wp-meta-contributions-widget.php' );
 require_once( 'lib/class.wp-codex-contributions-widget.php' );
 
 WP_Core_Contributions::init();
+WP_Meta_Contributions::init();
+
 ?>
