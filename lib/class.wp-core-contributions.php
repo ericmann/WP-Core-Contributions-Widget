@@ -74,33 +74,31 @@ class WP_Core_Contributions {
 
 		return $count;
 	}
-	
+
 	public static function get_codex_items( $username, $limit = 10 ) {
 		if ( null == $username ) return array();
-		
-		if ( true || false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
-			
+
+		if ( false == ( $formatted = get_transient( 'wp-codex-contributions-' . $username ) ) ) {
 			$results_url = add_query_arg( array(
-				'action'	=>	'query',
-				'list'		=>	'usercontribs',
-				'ucuser'	=>	$username,
-				'uclimit'	=>	$limit,
-				'ucdir'		=>	'older',
-				'format'	=>	'php'
+				'action'    => 'query',
+				'list'      => 'usercontribs',
+				'ucuser'    => $username,
+				'uclimit'   => $limit,
+				'ucdir'     => 'older',
+				'format'    => 'json'
 			), 'http://codex.wordpress.org/api.php' );
 			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
-			$results = wp_remote_retrieve_body( $response );
-
-			$raw = maybe_unserialize( $results );
+			$results  = wp_remote_retrieve_body( $response );
+			$raw      = json_decode( $results );
 			
-			/* Expected array format is as follows:
-			 * Array
+			/* Expected object format is as follows:
+			 * Object
 			 * (
-			 *     [query] => Array
+			 *     [query] => Object
 			 *         (
 			 *             [usercontribs] => Array
 			 *                 (
-			 *                     [0] => Array
+			 *                     [0] => Object
 			 *                         (
 			 *                             [user] => Mbijon
 			 *                             [pageid] => 23000
@@ -112,61 +110,63 @@ class WP_Core_Contributions {
 			 *                             [comment] => Functions typo fix
 			 *                         )
 			 **/
-			
+
 			$formatted = array();
-			
-			foreach( $raw['query']['usercontribs'] as $item ) {
+
+			foreach( $raw->query->usercontribs as $item ) {
 				$count = 0;
-				$clean_title = preg_replace( '/^Function Reference\//', '', (string) $item['title'], 1, $count );
+				$clean_title = preg_replace( '/^Function Reference\//', '', (string) $item->title, 1, $count );
 
 				$new_item = array(
-					'title'			=> $clean_title,
-					'description'	=> (string) $item['comment'],
-					'revision'		=> (int) $item['revid'],
-					'function_ref'	=> (bool) $count
+					'title'         => $clean_title,
+					'description'   => (string) $item->comment,
+					'revision'      => (int) $item->revid,
+					'function_ref'  => (bool) $count
 				);
 				array_push( $formatted, $new_item );
 			}
-			
+
 			set_transient( 'wp-codex-contributions-' . $username, $formatted, apply_filters( 'wpcc_codex_transient', 60 * 60 * 12 ) );
 		}
-		
+
 		return $formatted;
 	}
-	
+
 	public static function get_codex_count( $username ) {
 		if ( null == $username ) return array();
 
 		if ( false == ( $count = get_transient( 'wp-codex-contributions-count-' . $username ) ) ) {
-			
 			$results_url = add_query_arg( array(
-				'action'	=>	'query',
-				'list'		=>	'users',
-				'ususers'	=>	$username,
-				'usprop'	=>	'editcount',
-				'format'	=>	'xml'
+				'action'    =>  'query',
+				'list'      =>  'users',
+				'ususers'   =>  $username,
+				'usprop'    =>  'editcount',
+				'format'    =>  'json'
 			), 'http://codex.wordpress.org/api.php' );
 			$response = wp_remote_get( $results_url, array( 'sslverify' => false ) );
-			$results = wp_remote_retrieve_body( $response );
-			
-			/* Expected XML format is as follows:
-			 * <?xml version="1.0"?>
-			 * <api>
-  			 *   <query>
-			 *     <users>
-			 *       <user name="Ericmann" editcount="8" />
-			 *     </users>
-			 *   </query>
-			 * </api>
+			$results  = wp_remote_retrieve_body( $response );
+
+			/* Expected object format is as follows:
+			 * Object
+			 * (
+			 *     [query] => Object
+			 *         (
+			 *             [users] => Array
+			 *                 (
+			 *                     [0] => Object
+			 *                         (
+			 *                             [name] => Ericmann
+			 *                             [editcount] => 0
+			 *                         )
 			 **/
-			
-			$raw = new SimpleXMLElement( $results );
-			$count = (int) $raw->query->users->user["editcount"];
-			
+
+			$raw   = json_decode( $results );
+			$count = (int) $raw->query->users[0]->editcount;
+
 			set_transient( 'wp-codex-contributions-count-' . $username, $count, apply_filters( 'wpcc_codex_count_transient', 60 * 60 * 12 ) );
 		}
 
-		return $count;	
+		return $count;
 	}
 }
 
