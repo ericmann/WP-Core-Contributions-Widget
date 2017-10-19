@@ -2,13 +2,13 @@
 if ( ! class_exists('WP_Core_Contributions_Widget') ) :
 
 class WP_Core_Contributions_Widget extends WP_Widget {
-	function WP_Core_Contributions_Widget() {
+	function __construct() {
 		$widget_ops = array(
 			'classname' => 'widget_core_contributions',
 			'description' => __( 'Add a list of your accepted contributions to WordPress Core as a sidebar widget.', 'wp-core-contributions-widget' )
 		);
 
-		$this->WP_Widget( false, __( 'WP Core Contributions', 'wp-core-contributions-widget' ), $widget_ops );
+		parent::__construct( false, __( 'WP Core Contributions', 'wp-core-contributions-widget' ), $widget_ops );
 	}
 
 	function form( $instance ) {
